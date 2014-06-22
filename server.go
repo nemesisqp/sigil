@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"github.com/cupcake/sigil/gen"
 	"flag"
+	"os"
 	"fmt"
 )
 
