@@ -42,7 +42,7 @@ func main() {
 	flag.Parse()
 	var data = md5hash(*input)
 	var buf bytes.Buffer
-	jpeg.Encode(&buf, config.Make(*imgSize, false, data))
+	jpeg.Encode(&buf, config.Make(*imgSize, false, data), nil)
 	
 	
 	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), os.ModePerm)
