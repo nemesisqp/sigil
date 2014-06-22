@@ -38,8 +38,8 @@ func main() {
 	var imgSize = flag.Int("size", 240, "image size")
 	var input = flag.String("input", "", "image input seed")
 	var outFilePath = flag.String("out", "", "output file path")
-	var data = md5hash(input)
+	var data = md5hash(*input)
 	var buf bytes.Buffer
-	png.Encode(&buf, config.Make(imgSize, false, data))
-	ioutil.WriteFile(outFilePath, buf, 0644)
+	png.Encode(&buf, config.Make(*imgSize, false, data))
+	ioutil.WriteFile(*outFilePath, buf.Bytes(), 0644)
 }
