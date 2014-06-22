@@ -14,6 +14,7 @@ import (
 	"strings"
 
 	"github.com/cupcake/sigil/gen"
+	"flag"
 )
 
 var config = gen.Sigil{
@@ -32,7 +33,7 @@ var config = gen.Sigil{
 
 func rgb(r, g, b uint8) color.NRGBA { return color.NRGBA{r, g, b, 255} }
 
-type handler struct{}
+
 
 func (handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/favicon.ico" {
@@ -105,10 +106,10 @@ func md5hash(s string) []byte {
 }
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8000"
-	}
-	log.Println("Starting sigil on :" + port)
-	log.Fatal(http.ListenAndServe(":"+port, handler{}))
+	var imgSize = flag.Int("size", 240, "image size")
+	var input = flag.String("input", "", "image input seed")
+	var outFilePath = flag.String("out", "", "output file path")
+	var data = md5hash(input)
+	png.Encode(w, config.Make(imgSize, false, data))
+	ioutil.WriteFile(outFilePath, data, 0644)
 }
