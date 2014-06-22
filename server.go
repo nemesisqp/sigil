@@ -8,7 +8,6 @@ import (
 	"bytes"
 	"github.com/cupcake/sigil/gen"
 	"flag"
-	"os"
 )
 
 var config = gen.Sigil{
@@ -38,11 +37,13 @@ func md5hash(s string) []byte {
 func main() {
 	var imgSize = flag.Int("size", 240, "image size")
 	var input = flag.String("data", "", "image input seed")
+	var outFilePath = flag.String("output", "", "output file path")
+	flag.Parse()
 	var data = md5hash(*input)
 	var buf bytes.Buffer
 	png.Encode(&buf, config.Make(*imgSize, false, data))
 	
 	
-	err := ioutil.WriteFile("identicon.png", buf.Bytes(), os.ModePerm)
+	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), os.ModePerm)
 	if err != nil { panic(err) }
 }
