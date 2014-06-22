@@ -44,6 +44,6 @@ func main() {
 	png.Encode(&buf, config.Make(*imgSize, false, data))
 	f, err := os.OpenFile(*outFilePath, os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil { panic(err) }
-	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), 0666)
+	err = ioutil.WriteFile(*outFilePath, buf.Bytes(), 0666)
 	if err != nil { panic(err) }
 }
