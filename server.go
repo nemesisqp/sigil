@@ -9,7 +9,6 @@ import (
 	"github.com/cupcake/sigil/gen"
 	"flag"
 	"os"
-	"fmt"
 )
 
 var config = gen.Sigil{
