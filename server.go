@@ -6,7 +6,6 @@ import (
 	"image/png"
 	"io/ioutil"
 	"bytes"
-	"os"
 	"github.com/cupcake/sigil/gen"
 	"flag"
 )
