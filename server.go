@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"github.com/cupcake/sigil/gen"
 	"flag"
+	"fmt"
 )
 
 var config = gen.Sigil{
@@ -41,6 +42,7 @@ func main() {
 	var data = md5hash(*input)
 	var buf bytes.Buffer
 	png.Encode(&buf, config.Make(*imgSize, false, data))
-	err = ioutil.WriteFile(*outFilePath, buf.Bytes(), 0666)
+	fmt.Println(buf)
+	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), 0666)
 	if err != nil { panic(err) }
 }
