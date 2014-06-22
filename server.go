@@ -37,12 +37,13 @@ func md5hash(s string) []byte {
 
 func main() {
 	var imgSize = flag.Int("size", 240, "image size")
-	var input = flag.String("in", "", "image input seed")
-	var outFilePath = flag.String("out", "", "output file path")
+	var input = flag.String("data", "", "image input seed")
+	var outFilePath = flag.String("output", "", "output file path")
 	var data = md5hash(*input)
 	var buf bytes.Buffer
 	png.Encode(&buf, config.Make(*imgSize, false, data))
 	fmt.Println(buf)
-	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), 0666)
+	fmt.Println(*outFilePath)
+	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), os.ModePerm)
 	if err != nil { panic(err) }
 }
