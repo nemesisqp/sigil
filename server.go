@@ -42,7 +42,8 @@ func main() {
 	var data = md5hash(*input)
 	var buf bytes.Buffer
 	png.Encode(&buf, config.Make(*imgSize, false, data))
-	os.OpenFile(*outFilePath, os.O_WRONLY|os.O_CREATE, 0644)
-	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), 0644)
+	f, err := os.OpenFile(*outFilePath, os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil { panic(err) }
+	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), 0666)
 	if err != nil { panic(err) }
 }
