@@ -5,6 +5,7 @@ import (
 	"image/color"
 	"image/png"
 	"io/ioutil"
+	"bytes"
 	"github.com/cupcake/sigil/gen"
 	"flag"
 )
@@ -38,6 +39,7 @@ func main() {
 	var input = flag.String("input", "", "image input seed")
 	var outFilePath = flag.String("out", "", "output file path")
 	var data = md5hash(input)
-	png.Encode(w, config.Make(imgSize, false, data))
-	ioutil.WriteFile(outFilePath, data, 0644)
+	var buf bytes.Buffer
+	png.Encode(&buf, config.Make(imgSize, false, data))
+	ioutil.WriteFile(outFilePath, buf, 0644)
 }
