@@ -3,7 +3,7 @@ package main
 import (
 	"crypto/md5"
 	"image/color"
-	"image/png"
+	"image/jpeg"
 	"io/ioutil"
 	"bytes"
 	"github.com/cupcake/sigil/gen"
@@ -42,7 +42,7 @@ func main() {
 	flag.Parse()
 	var data = md5hash(*input)
 	var buf bytes.Buffer
-	png.Encode(&buf, config.Make(*imgSize, false, data))
+	jpeg.Encode(&buf, config.Make(*imgSize, false, data))
 	
 	
 	err := ioutil.WriteFile(*outFilePath, buf.Bytes(), os.ModePerm)
